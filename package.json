@@ -1,0 +1,26 @@
+{
+  "name": "nerv",
+  "version": "1.0.0",
+  "description": "A news aggregation app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nervnews/nerv.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nervnews/nerv/issues"
+  },
+  "homepage": "https://github.com/nervnews/nerv#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "nodemon": "^1.14.11"
+  }
+}
