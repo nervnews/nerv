@@ -15,4 +15,4 @@ app.use(router);
 app.set('port', process.env.PORT || 3000);
 
 app.listen(app.get('port'),()=>{
-  console.log(`We are listeining now at http://${process.env.HOST ? process.env.HOST : "localhost"}:${app.get('port')}`);});
+  console.log(`We are listening now at http://${process.env.HOST ? process.env.HOST : "localhost"}:${app.get('port')}`);});

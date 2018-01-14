@@ -6,7 +6,6 @@ router.get("/", (req, res) => {
 })
 
 router.get("*", (req, res)=> {
-  console.log(req.url);
   res.send('<h1>404 PAGE NOT FOUND</h1>')
 })
 
