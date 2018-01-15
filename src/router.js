@@ -1,5 +1,6 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
+const guardianKey = require("./api/guardian")
 
 router.get("/", (req, res) => {
   res.render('home');
@@ -43,5 +44,8 @@ router.get("/articles", (req, res) => {
 
 
 
+router.get("*", (req, res) => {
+  res.send("<h1>404 PAGE NOT FOUND</h1>");
+});
 
 module.exports = router;
