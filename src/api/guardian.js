@@ -1,7 +1,7 @@
-const guardian = require("guardian-js");
+const Guardian = require("guardian-js");
 const guardian_key = process.env.GUARDIAN_KEY;
 const guardianKey = (query, cb) => {
-  let api = new guardian(guardian_key, false);
+  const api = new Guardian(guardian_key, false);
 
   api.content
     .search(query, {

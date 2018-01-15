@@ -13,7 +13,7 @@ app.use((err, req, res, next) => {
   res.status(500).send("Internal Server Error");
 });
 app.use(router);
-app.set("port", process.env.PORT || 3001);
+app.set("port", process.env.PORT || 3000);
 
 app.listen(app.get("port"), () => {
   console.log(
