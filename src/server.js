@@ -2,7 +2,6 @@ require("env2")("./config.env");
 const express = require("express");
 const router = require("./router");
 const bodyParser = require("body-parser");
-const os = require("os");
 const app = express();
 
 app.use(bodyParser.json());
