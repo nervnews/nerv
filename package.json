@@ -21,6 +21,7 @@
   "dependencies": {
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
+    "guardian-js": "^1.0.11",
     "nodemon": "^1.14.11"
   }
 }
