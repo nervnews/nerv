@@ -1,8 +1,8 @@
 {
   "name": "nerv",
   "version": "1.0.0",
-  "description": "A news aggregation app",
-  "main": "index.js",
+  "description": "News aggregator with data visualization",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon src/server.js"
@@ -18,10 +18,16 @@
     "url": "https://github.com/nervnews/nerv/issues"
   },
   "homepage": "https://github.com/nervnews/nerv#readme",
+  "devDependencies": {
+    "morgan": "^1.9.0",
+    "nodemon": "^1.14.11"
+  },
   "dependencies": {
     "body-parser": "^1.18.2",
+    "emotional": "0.0.3",
     "express": "^4.16.2",
     "guardian-js": "^1.0.11",
-    "nodemon": "^1.14.11"
+    "nodemon": "^1.14.11",
+    "sentiment": "^4.1.0"
   }
 }
