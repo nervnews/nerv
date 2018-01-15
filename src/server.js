@@ -1,3 +1,4 @@
+require("env2")("./config.env");
 const router = require('./router');
 const path = require('path');
 const exphbs = require('express-handlebars');
@@ -6,7 +7,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const os = require("os");
 const app = express();
-require("env2")("./config.env");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
