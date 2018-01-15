@@ -28,6 +28,7 @@
     "express": "^4.16.2",
     "guardian-js": "^1.0.11",
     "nodemon": "^1.14.11",
+    "polarity": "^3.0.1",
     "sentiment": "^4.1.0"
   }
 }
