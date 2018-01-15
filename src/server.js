@@ -5,7 +5,6 @@ const path = require('path');
 const exphbs = require('express-handlebars');
 const helpers = require('./views/helpers/index')
 const bodyParser = require("body-parser");
-const os = require("os");
 const app = express();
 
 app.use(bodyParser.json());
