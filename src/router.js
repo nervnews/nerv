@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  res.send('<h1>You are in the homepage</h1>');
+  res.render('home');
 })
 
 router.get("*", (req, res)=> {

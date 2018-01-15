@@ -8,9 +8,9 @@
 </div>
 <div id="searchResults" class="search__results">
     {{#each articles}}
-    <img src={{image}}></img>
+    <img src={{thumbnail}}></img>
     <h3>{{headline}}</h3>
-    <p>{{description}}</p>
+    <p>{{trailText}}</p>
     <form action="/visualize">
     <button type="submit">Visualize</button>
     </form>
