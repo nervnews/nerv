@@ -12,10 +12,3 @@ function fetchGET(url, cb) {
     xhr.open('GET', url, true);
     xhr.send();
 }
-
-document.getElementById('searchBtn').addEventListener('click', function(e) {
-    fetchGET('/articles', function(err, result) {
-        if (err) console.log(err);
-        else console.log(result);
-    });
-});
