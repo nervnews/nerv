@@ -37,11 +37,4 @@ router.get("/articles", (req, res) => {
 //   res.send('<h1>404 PAGE NOT FOUND</h1>')
 // })
 
-
-
-
-
-
-
-
 module.exports = router;
