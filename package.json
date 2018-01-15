@@ -4,12 +4,14 @@
   "description": "News aggregator with data visualization",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nervnews/nerv.git"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
@@ -21,6 +23,7 @@
     "nodemon": "^1.14.11"
   },
   "dependencies": {
+    "body-parser": "^1.18.2",
     "emotional": "0.0.3",
     "express": "^4.16.2",
     "polarity": "^3.0.1",
