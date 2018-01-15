@@ -1,3 +1,4 @@
+require("env2")("./config.env");
 const express = require("express");
 const router = require("./router");
 const bodyParser = require("body-parser");
@@ -12,7 +13,7 @@ app.use((err, req, res, next) => {
   res.status(500).send("Internal Server Error");
 });
 app.use(router);
-app.set("port", process.env.PORT || 3000);
+app.set("port", process.env.PORT || 3001);
 
 app.listen(app.get("port"), () => {
   console.log(
