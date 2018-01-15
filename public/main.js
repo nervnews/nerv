@@ -13,4 +13,9 @@ function fetchGET(url, cb) {
     xhr.send();
 }
 
-
+document.getElementById('searchBtn').addEventListener('click', function(e) {
+    fetchGET('/articles', function(err, result) {
+        if (err) console.log(err);
+        else console.log(result);
+    });
+});

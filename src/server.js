@@ -24,6 +24,8 @@ app.engine(
      })
 );
 
+app.use(express.static(path.join(__dirname, '..', 'public')));
+
 app.use((err,req,res,next)=>{
   console.log(err.stack);
   res.status(500).send("Internal Server Error");
