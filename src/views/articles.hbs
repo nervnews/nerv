@@ -1,0 +1,18 @@
+
+<div id="search">
+  <form class="search__form">
+     <input class="search__input" type="text" placeholder="Search by
+        keyword">
+     <button id="searchBtn" class="search__button" type="submit">Search</button>
+  </form>
+</div>
+<div id="searchResults" class="search__results">
+  {{#each articles}}
+    <img src={{fields.thumbnail}}></img>
+    <h3>{{fields.headline}}</h3>
+    <p>{{trailText}}</p>
+    <form action="/visualize">
+    <button type="submit">Visualize</button>
+    </form>
+    {{/each}}
+</div>

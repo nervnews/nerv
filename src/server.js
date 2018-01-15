@@ -1,11 +1,30 @@
 const express = require('express');
 const router = require('./router');
+const path = require('path');
+const exphbs = require('express-handlebars');
+const helpers = require('./views/helpers/index');
 const bodyParser = require("body-parser");
 const os = require("os");
 const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
+app.engine(
+   'hbs',
+     exphbs({
+         extname: 'hbs',
+         layoutsDir: path.join(__dirname, 'views', 'layouts'),
+         partialsDir: path.join(__dirname, 'views', 'partials'),
+         defaultLayout: 'main',
+         helpers,
+     })
+);
+
+app.use(express.static(path.join(__dirname, '..', 'public')));
 
 app.use((err,req,res,next)=>{
   console.log(err.stack);
