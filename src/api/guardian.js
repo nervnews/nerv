@@ -1,12 +1,12 @@
 const Guardian = require("guardian-js");
-const guardian_key = process.env.GUARDIAN_KEY;
+const guardian_filter = require("./guardian_filter");
 
 const guardianKey = (query, cb) => {
-  const api = new Guardian(guardian_key, false);
+  const welvonAPI = new Guardian(process.env.GUARDIAN_KEY, false);
 
-  api.content
+  welvonAPI.content
     .search(query, {
-      "show-fields": "headline,trailText,thumbnail,bodyText,lastModified"
+      "show-fields": "headline,trailText,thumbnail,bodyText,page,lastModified"
     })
     .then(response => {
       cb(JSON.parse(response.body));
