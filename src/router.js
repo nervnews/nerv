@@ -1,5 +1,5 @@
 const express = require("express");
-const { guardianKey, guardianItem } = require('./api/guardian');
+const { guardianListing, guardianItem } = require('./api/guardian');
 const qs = require('querystring');
 const sentiment = require('sentiment');
 const polarity = require('polarity');
@@ -12,7 +12,7 @@ router.get("/", (req, res) => {
 
 router.post("/articles", (req, res) => {
   const query = req.body.search;
-    guardianKey(query, (response) => {
+    guardianListing(query, (response) => {
       const articles = response.response.results;
       res.status(200).render('articles', { articles });
   })
@@ -34,7 +34,7 @@ router.post('/visualize', (req, res) => {
             'Polarity' : polarityData
           }
         }
-      res.send(data)  
+      res.send(data)
     })
   })
 })

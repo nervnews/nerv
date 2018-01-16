@@ -1,8 +1,7 @@
 const Guardian = require("guardian-js");
-const guardian_key = process.env.GUARDIAN_KEY;
 
-const guardianKey = (query, cb) => {
-  const api = new Guardian(guardian_key, false);
+const guardianListing = (query, cb) => {
+  const api = new Guardian(process.env.GUARDIAN_KEY, false);
   api.content
     .search(query, {
       "show-fields": "headline,trailText,thumbnail,bodyText,lastModified"
@@ -13,7 +12,7 @@ const guardianKey = (query, cb) => {
 };
 
 const guardianItem = (id, cb) => {
-  const api = new Guardian(guardian_key, false);
+  const api = new Guardian(process.env.GUARDIAN_KEY, false);
   api.item
     .search(id, {
       "show-fields": "bodyText"
@@ -24,6 +23,6 @@ const guardianItem = (id, cb) => {
 }
 
 module.exports = {
-  guardianKey,
+  guardianListing,
   guardianItem
 }
