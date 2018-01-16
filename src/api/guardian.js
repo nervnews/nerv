@@ -4,6 +4,10 @@ let allArticles = [];
 const guardianKey = (query, page, cb) => {
   const welvonAPI = new Guardian(process.env.GUARDIAN_KEY, false);
 
+
+const guardianListing = (query, cb) => {
+ 
+  const welvonAPI = new Guardian(process.env.GUARDIAN_KEY, false);
   welvonAPI.content
     .search(query, {
       "show-fields": "headline,trailText,thumbnail,bodyText,page,lastModified",
@@ -22,4 +26,4 @@ const guardianKey = (query, page, cb) => {
     });
 };
 
-module.exports = guardianKey;
+module.exports = guardianListing;
