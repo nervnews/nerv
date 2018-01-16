@@ -25,10 +25,8 @@ buttons.forEach(function(btn) {
       }
       else {
         //This is the time to process the data using D3.js
-        console.log(data);
-        
+
       }
     })
   })
 })
-
