@@ -1,9 +1,9 @@
 {{>searchbar}}
 <div id="searchResults" class="search__results">
   {{#each articles}}
-    <img src={{fields.thumbnail}}></img>
-    <h3>{{fields.headline}}</h3>
-    <p>{{fields.trailText}}</p>
+    <img src={{image}}></img>
+    <h3>{{headline}}</h3>
+    <p>{{trailText}}</p>
     <form action="/visualize">
     <button type="submit">Visualize</button>
     </form>
