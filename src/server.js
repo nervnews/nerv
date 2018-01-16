@@ -6,7 +6,6 @@ const exphbs = require('express-handlebars');
 const helpers = require('./views/helpers/index');
 const express = require("express");
 const bodyParser = require("body-parser");
-const os = require("os");
 const app = express();
 
 app.use(logger('dev'));
