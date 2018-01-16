@@ -26,7 +26,9 @@
     "body-parser": "^1.18.2",
     "emotional": "0.0.3",
     "express": "^4.16.2",
-    "express-handlebars": "^3.0.0",
+    "guardian-js": "^1.0.11",
+    "nodemon": "^1.14.11",
+   "express-handlebars": "^3.0.0",
     "polarity": "^3.0.1",
     "sentiment": "^4.1.0"
   }
