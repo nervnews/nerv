@@ -1,5 +1,4 @@
 module.exports = response => {
-  console.log(response.results.constructor);
   let results = response.results.reduce((articles, article) => {
     articles.push({
       id: article.id,
