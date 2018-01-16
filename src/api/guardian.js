@@ -13,10 +13,7 @@ const guardianListing = (query, cb) => {
 
 const guardianItem = (id, cb) => {
   const api = new Guardian(process.env.GUARDIAN_KEY, false);
-  api.item
-    .search(id, {
-      "show-fields": "bodyText"
-    })
+  api.item.search(id, { "show-fields": "bodyText" })
     .then(response => {
       cb(JSON.parse(response.body))
     });

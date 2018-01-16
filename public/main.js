@@ -18,7 +18,6 @@ buttons.forEach(function(btn) {
   btn.addEventListener('click', function(e) {
     e.preventDefault();
     var query = [btn.parentElement[0].value];
-    console.log(query);
     var data = fetchPOST('/visualize', query, function(err, data) {
       if (err) {
         console.log(err);
