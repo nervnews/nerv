@@ -12,6 +12,7 @@ function fetchPOST(url, data, callback) {
   xhr.send(JSON.stringify(data));
 }
 
+
 var buttons = document.querySelectorAll('.article__btn');
 
 buttons.forEach(function(btn) {
@@ -31,3 +32,4 @@ buttons.forEach(function(btn) {
     })
   })
 })
+

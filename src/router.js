@@ -5,17 +5,19 @@ const sentiment = require('sentiment');
 const polarity = require('polarity');
 const emotional = require('emotional');
 const router = express.Router();
+const guardianListing = require("./api/guardian")
+const bodyParser = require("body-parser");
 
 router.get("/", (req, res) => {
   res.render('home');
 })
 
 router.post("/articles", (req, res) => {
-  const query = req.body.search;
-    guardianKey(query, (response) => {
-      const articles = response.response.results;
-      res.status(200).render('articles', { articles });
-  })
+const query = req.body.search;
+    guardianListing(query, (results) => {
+      const articles = results.response.results
+        res.status(200).render('articles', { articles });
+      })
 })
 
 router.post('/visualize', (req, res) => {

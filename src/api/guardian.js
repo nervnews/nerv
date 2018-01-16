@@ -1,9 +1,9 @@
 const Guardian = require("guardian-js");
 const guardian_filter = require("./guardian_filter");
 
-const guardianKey = (query, cb) => {
+
+const guardianListing = (query, cb) => {
   const welvonAPI = new Guardian(process.env.GUARDIAN_KEY, false);
-  
   welvonAPI.content
     .search(query, {
       "show-fields": "headline,trailText,thumbnail,bodyText,page,lastModified"
@@ -12,6 +12,7 @@ const guardianKey = (query, cb) => {
       cb(JSON.parse(response.body));
     });
 };
+
 
 const guardianItem = (id, cb) => {
   const api = new Guardian(process.env.GUARDIAN_KEY, false);
@@ -25,6 +26,6 @@ const guardianItem = (id, cb) => {
 }
 
 module.exports = {
-  guardianKey,
+  guardianListing,
   guardianItem
 }
