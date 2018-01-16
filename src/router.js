@@ -9,7 +9,7 @@ router.get("/", (req, res) => {
 
 router.post("/articles", (req, res) => {
   query = req.body.search;
-  guardianListing(query, results => {
+  guardianListing(query, 1, results => {
     const articles = results;
     res.status(200).render("articles", { articles });
   });

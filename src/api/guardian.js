@@ -10,6 +10,7 @@ const guardianListing = (query, page, cb) => {
       page: page
     })
     .then(response => {
+      console.log(response.body);
       json_res = JSON.parse(response.body).response;
       const { currentPage, pageSize } = json_res;
       if (currentPage + 1 <= pageSize) {
