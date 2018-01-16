@@ -10,8 +10,7 @@ const guardianListing = (query, cb) => {
       "show-fields": "headline,trailText,thumbnail,bodyText,page,lastModified"
     })
     .then(response => {
-      console.log('here '+response.body);
-      cb(JSON.parse(response.body));
+      cb(JSON.parse(response.body.response));
     });
 };
 
