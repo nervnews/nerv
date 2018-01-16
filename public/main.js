@@ -12,5 +12,3 @@ function fetchGET(url, cb) {
     xhr.open('GET', url, true);
     xhr.send();
 }
-
-
