@@ -7,6 +7,7 @@ router.get("/", (req, res) => {
   res.render('home');
 })
 
+
 router.post("/articles", (req, res) => {
 query = req.body.search;
     guardianListing(query, (results) => {
