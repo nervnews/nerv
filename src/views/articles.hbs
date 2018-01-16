@@ -1,16 +1,12 @@
 
-<div id="search">
-  <form class="search__form" action="/articles" method="POST">
-     <input name="search" id="searchInput" class="search__input" type="text" placeholder="Search by
-        keyword">
-     <input id="searchBtn" class="search_btn" type="submit" value="Search">
-  </form>
-</div>
+{{>searchbar}}
+
 <div id="searchResults" class="search__results">
   {{#each articles}}
     <img src={{fields.thumbnail}}></img>
     <h3>{{fields.headline}}</h3>
     <p>{{fields.trailText}}</p>
+
     <form class"article_form" action="/visualize" method="POST">
       <input name="articleId" type="hidden" value={{id}}>
       <input class="article__btn" name="articleID" type="submit" value="Visualize">

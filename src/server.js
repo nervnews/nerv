@@ -6,14 +6,12 @@ const exphbs = require('express-handlebars');
 const helpers = require('./views/helpers/index');
 const express = require("express");
 const bodyParser = require("body-parser");
-const os = require("os");
 const app = express();
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 
-// view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.engine(
@@ -23,13 +21,12 @@ app.engine(
          layoutsDir: path.join(__dirname, 'views', 'layouts'),
          partialsDir: path.join(__dirname, 'views', 'partials'),
          defaultLayout: 'main',
-         helpers,
+         helpers
      })
 );
 
 app.use(express.static(path.join(__dirname, '..', 'public')));
 app.use(router);
-
 app.use((err, req, res, next) => {
   console.log(err.stack);
   res.status(500).send("Internal Server Error");
