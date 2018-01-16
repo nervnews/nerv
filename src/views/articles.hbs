@@ -1,9 +1,9 @@
 
 <div id="search">
-  <form class="search__form">
-     <input class="search__input" type="text" placeholder="Search by
+  <form class="search__form" action="/articles" method="POST">
+     <input name="search" id="searchInput" class="search__input" type="text" placeholder="Search by
         keyword">
-     <button id="searchBtn" class="search__button" type="submit">Search</button>
+     <input id="searchBtn" class="search_btn" type="submit" value="Search">
   </form>
 </div>
 <div id="searchResults" class="search__results">
@@ -11,8 +11,9 @@
     <img src={{fields.thumbnail}}></img>
     <h3>{{fields.headline}}</h3>
     <p>{{fields.trailText}}</p>
-    <form action="/visualize">
-    <button type="submit">Visualize</button>
+    <form class"article_form" action="/visualize" method="POST">
+      <input name="articleId" type="hidden" value={{id}}>
+      <input class="article__btn" name="articleID" type="submit" value="Visualize">
     </form>
     {{/each}}
 </div>

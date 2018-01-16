@@ -12,4 +12,18 @@ const guardianKey = (query, cb) => {
     });
 };
 
-module.exports = guardianKey;
+const guardianItem = (id, cb) => {
+  const api = new Guardian(guardian_key, false);
+  api.item
+    .search(id, {
+      "show-fields": "bodyText"
+    })
+    .then(response => {
+      cb(JSON.parse(response.body))
+    });
+}
+
+module.exports = {
+  guardianKey,
+  guardianItem
+}
