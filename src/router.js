@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const guardianKey = require("./api/guardian")
+const guardianListing = require("./api/guardian")
 const bodyParser = require("body-parser");
 
 router.get("/", (req, res) => {
@@ -9,7 +9,7 @@ router.get("/", (req, res) => {
 
 router.post("/articles", (req, res) => {
 query = req.body.search;
-    guardianKey(query, (results) => {
+    guardianListing(query, (results) => {
       const articles = results.response.results
         res.status(200).render('articles', { articles });
       })

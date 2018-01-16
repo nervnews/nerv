@@ -1,10 +1,4 @@
-<div id="search">
-  <form class="search__form" action="/articles" method="POST">
-     <input class="search__input" type="text" name="search" placeholder="Search by
-        keyword">
-     <input type="submit" value="Submit">
-  </form>
-</div>
+{{>searchbar}}
 <div id="searchResults" class="search__results">
   {{#each articles}}
     <img src={{fields.thumbnail}}></img>
