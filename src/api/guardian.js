@@ -10,14 +10,14 @@ const guardianListing = (query, page, cb) => {
       page: page
     })
     .then(response => {
-      json_res = JSON.parse(response.body).response;
-      const { currentPage, pageSize } = json_res;
+      jsonRes = JSON.parse(response.body).response;
+      const { currentPage, pageSize } = jsonRes;
       if (currentPage == 1) allArticles = [];
       if (currentPage + 1 <= pageSize && currentPage < 5) {
-        allArticles = allArticles.concat(guardian_filter(json_res));
+        allArticles = allArticles.concat(guardian_filter(jsonRes));
         guardianListing(query, currentPage + 1, cb);
       } else {
-        cb(allArticles.concat(guardian_filter(json_res)));
+        cb(allArticles.concat(guardian_filter(jsonRes)));
       }
     });
 };
