@@ -6,11 +6,11 @@
   {{#each articles}}
   <div class="bg-white pa4 center br3 mb4">
     <div class="mw9 measure center">
-    <img class="br2" src={{image}}></img>
+    <img class="br2" src={{fields.thumbnail}}></img>
     </div>
     <div class="measure center">
-    <h3 class="f4 f2-ns mt2 mb3">{{headline}}</h3>
-    <p class="f5 tj">{{trailText}}</p>
+    <h3 class="f4 f2-ns mt2 mb3">{{fields.headline}}</h3>
+    <p class="f5 tj">{{fields.trailText}}</p>
     <form class"article_form" action="/visualize" method="POST">
       <input name="articleId" type="hidden" value={{id}}>
       <input class="article__btn
