@@ -1,11 +1,11 @@
 module.exports = response => {
-  let results = response.results.reduce((articles, article) => {
+  const results = response.results.reduce((articles, { fields, id }) => {
     articles.push({
-      id: article.id,
-      image: article.fields.thumbnail,
-      headline: article.fields.headline,
-      trailText: article.fields.trailText,
-      bodyText: article.fields.bodyText
+      id,
+      image: fields.thumbnail,
+      headline: fields.headline,
+      trailText: fields.trailText,
+      bodyText: fields.bodyText
     });
     return articles;
   }, []);
