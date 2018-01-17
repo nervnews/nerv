@@ -14,7 +14,7 @@ router.get("/", (req, res) => {
 
 router.post("/articles", (req, res) => {
   const query = req.body.search;
-    guardianListing(query, (response) => {
+  guardianListing(query, 1, results => {
       const articles = response.response.results;
       res.status(200).render('articles', { articles });
   })
