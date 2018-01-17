@@ -1,11 +1,17 @@
+
 {{>searchbar}}
+
 <div id="searchResults" class="search__results">
   {{#each articles}}
     <img src={{image}}></img>
     <h3>{{headline}}</h3>
     <p>{{trailText}}</p>
-    <form action="/visualize">
-    <button type="submit">Visualize</button>
+      <form class"article_form" action="/visualize" method="POST">
+      <input name="articleId" type="hidden" value={{id}}>
+      <input class="article__btn" name="articleID" type="submit" value="Visualize">
+
+
+
     </form>
     {{/each}}
 </div>

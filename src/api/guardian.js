@@ -22,4 +22,16 @@ const guardianListing = (query, page, cb) => {
     });
 };
 
-module.exports = guardianListing;
+
+const guardianItem = (id, cb) => {
+  const api = new Guardian(process.env.GUARDIAN_KEY, false);
+  api.item.search(id, { "show-fields": "bodyText" })
+    .then(response => {
+      cb(JSON.parse(response.body))
+    });
+}
+
+module.exports = {
+  guardianListing,
+  guardianItem
+}
