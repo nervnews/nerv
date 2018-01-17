@@ -4,9 +4,9 @@ const qs = require('querystring');
 const sentiment = require('sentiment');
 const polarity = require('polarity');
 const emotional = require('emotional');
-const router = express.Router();
-const guardianListing = require("./api/guardian")
 const bodyParser = require("body-parser");
+const router = express.Router();
+
 
 router.get("/", (req, res) => {
   res.render('home');
