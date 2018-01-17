@@ -1,12 +1,14 @@
 require("env2")("./config.env");
-const express = require('express');
 const router = require('./router');
+const logger = require('morgan');
 const path = require('path');
 const exphbs = require('express-handlebars');
-const helpers = require('./views/helpers/index')
+const helpers = require('./views/helpers/index');
+const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 
+app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -24,12 +26,12 @@ app.engine(
 );
 
 app.use(express.static(path.join(__dirname, '..', 'public')));
-
-app.use((err,req,res,next)=>{
+app.use(router);
+app.use((err, req, res, next) => {
   console.log(err.stack);
   res.status(500).send("Internal Server Error");
 });
-app.use(router);
+
 app.set("port", process.env.PORT || 3000);
 
 app.listen(app.get("port"), () => {
