@@ -3,13 +3,15 @@
 
 <div id="searchResults" class="search__results">
   {{#each articles}}
-    <img src={{fields.thumbnail}}></img>
-    <h3>{{fields.headline}}</h3>
-    <p>{{fields.trailText}}</p>
-
-    <form class"article_form" action="/visualize" method="POST">
+    <img src={{image}}></img>
+    <h3>{{headline}}</h3>
+    <p>{{trailText}}</p>
+      <form class"article_form" action="/visualize" method="POST">
       <input name="articleId" type="hidden" value={{id}}>
       <input class="article__btn" name="articleID" type="submit" value="Visualize">
+
+
+
     </form>
     {{/each}}
 </div>

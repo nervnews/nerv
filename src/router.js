@@ -5,7 +5,6 @@ const sentiment = require('sentiment');
 const polarity = require('polarity');
 const emotional = require('emotional');
 const router = express.Router();
-const guardianListing = require("./api/guardian")
 const bodyParser = require("body-parser");
 
 router.get("/", (req, res) => {
@@ -14,7 +13,7 @@ router.get("/", (req, res) => {
 
 router.post("/articles", (req, res) => {
   const query = req.body.search;
-    guardianListing(query, (response) => {
+  guardianListing(query, 1, results => {
       const articles = response.response.results;
       res.status(200).render('articles', { articles });
   })
