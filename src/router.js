@@ -1,11 +1,12 @@
 const express = require("express");
-const { guardianListing, guardianItem } = require("./api/guardian");
-const qs = require("querystring");
-const sentiment = require("sentiment");
-const polarity = require("polarity");
-const emotional = require("emotional");
-const router = express.Router();
+const { guardianListing, guardianItem } = require('./api/guardian');
+const qs = require('querystring');
+const sentiment = require('sentiment');
+const polarity = require('polarity');
+const emotional = require('emotional');
 const bodyParser = require("body-parser");
+const router = express.Router();
+
 
 router.get("/", (req, res) => {
   res.render("home");
