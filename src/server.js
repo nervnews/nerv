@@ -1,31 +1,31 @@
 require("env2")("./config.env");
-const router = require('./router');
-const logger = require('morgan');
-const path = require('path');
-const exphbs = require('express-handlebars');
-const helpers = require('./views/helpers/index');
+const router = require("./router");
+const logger = require("morgan");
+const path = require("path");
+const exphbs = require("express-handlebars");
+const helpers = require("./views/helpers/index");
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 
-app.use(logger('dev'));
+app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "hbs");
 app.engine(
-   'hbs',
-     exphbs({
-         extname: 'hbs',
-         layoutsDir: path.join(__dirname, 'views', 'layouts'),
-         partialsDir: path.join(__dirname, 'views', 'partials'),
-         defaultLayout: 'main',
-         helpers
-     })
+  "hbs",
+  exphbs({
+    extname: "hbs",
+    layoutsDir: path.join(__dirname, "views", "layouts"),
+    partialsDir: path.join(__dirname, "views", "partials"),
+    defaultLayout: "main",
+    helpers
+  })
 );
 
-app.use(express.static(path.join(__dirname, '..', 'public')));
+app.use(express.static(path.join(__dirname, "..", "public")));
 app.use(router);
 app.use((err, req, res, next) => {
   console.log(err.stack);
