@@ -39,7 +39,7 @@ exports.sentiments = (req, res) => {
           Polarity: polarityData
         }
       };
-      res.send(data);
+      res.json(data);
     });
   });
 }

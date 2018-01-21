@@ -18,7 +18,7 @@ function fetchGET(url, cb) {
     if (xhr.readyState == 4 && xhr.status !== 200) {
       cb(xhr.responseText);
     } else if (xhr.readyState == 4 && xhr.status === 200) {
-      cb(null, xhr.responseText);
+      cb(null, JSON.parse(xhr.responseText));
     }
   };
   xhr.open('GET', url);
