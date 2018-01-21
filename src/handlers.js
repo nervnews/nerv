@@ -4,8 +4,6 @@ const qs = require('querystring');
 const sentiment = require('sentiment');
 const polarity = require('polarity');
 const emotional = require('emotional');
-const bodyParser = require("body-parser");
-const router = express.Router();
 
 exports.home = (re, res) => {
   res.render('home');
@@ -39,7 +37,10 @@ exports.sentiments = (req, res) => {
           Polarity: polarityData
         }
       };
-      res.json(data);
+      
+      
+      
+      .json(data);
     });
   });
 }
