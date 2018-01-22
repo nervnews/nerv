@@ -1,116 +1,114 @@
-var urlParams = new URLSearchParams(window.location.search);
-var url = "visualize/" + urlParams.getAll("articleID");
+const urlParams = new URLSearchParams(window.location.search);
+const url = `visualize/${urlParams.getAll('articleID')}`;
 
-fetchGET(url, function(err, data) {
+document.getElementById('back_button').addEventListener('click', () => {
+  console.log('I am clicked ');
+  window.history.back();
+});
+fetchGET(url, (err, response) => {
   if (err) {
     console.log(err);
   } else {
-    //This is the time to process the data using D3.js
-    //By adding a console log, it's possible to see the data that is returned
-    //from the backend after sentiment analysis processing.
-    //The following is a proof of concept on how we render this data using D3.
-    var data = data.splice(0, 15);
+    console.log(response);
+    // This is the time to process the data using D3.js
+    // By adding a console log, it's possible to see the data that is returned
+    // from the backend after sentiment analysis processing.
+    // The following is a proof of concept on how we render this data using D3.
 
-    var svg = d3.select("svg");
-    var max_size = data[0].size;
-    var min_size = data[data.length - 1].size;
-    var width = window.innerWidth * 0.9;
-    var height = window.innerHeight * 0.9;
+    const data = response.data.splice(0, 15);
+    console.log('this is data-> ', data);
+    document.getElementById('title').innerHTML = response.title;
+    const svg = d3.select('svg');
+    const max_size = data[0].size;
+    const min_size = data[data.length - 1].size;
+    const width = window.innerWidth * 0.9;
+    const height = window.innerHeight * 0.9;
+    let radius = 4;
+    let fontSize = 4;
+    let scaleIt,
+      forceX,
+      forceY,
+      radiusX,
+      radiusY;
+    if (width < height) {
+      scaleIt = width;
+      forceX = 1.97;
+      forceY = 3;
+      radiusX = 20;
+      radiusY = 6;
+    } else {
+      scaleIt = height;
+      forceX = 2;
+      forceY = 2.5;
+      radiusX = 30;
+      radiusY = 10;
+    }
 
-    var radius = 4;
-    var fontSize = 4;
-    var scaleIt = width < height ? width : height;
-
-    var radiusScale = d3
+    const radiusScale = d3
       .scaleSqrt()
       .domain([min_size, max_size])
-      .range([scaleIt / 20, scaleIt / 5]);
+      .range([scaleIt / radiusX, scaleIt / radiusY]);
 
-    var drag = d3
+    const drag = d3
       .drag()
-      .on("start", dragstarted)
-      .on("drag", dragged)
-      .on("end", dragended);
+      .on('start', dragstarted)
+      .on('drag', dragged)
+      .on('end', dragended);
 
-    var group = svg
-      .selectAll("g")
+    const group = svg
+      .selectAll('g')
       .data(data)
       .enter()
-      .append("g")
+      .append('g')
       .call(drag);
 
     group
-      .append("circle")
-      .attr("cx", function(d) {
-        return width / 2;
-      })
-      .attr("cy", function(d) {
-        return height / 2;
-      })
-      .attr("r", function(d) {
-        return 5;
-      })
-      .attr("fill", function(d) {
-        return d.color_score;
-      });
+      .append('circle')
+      .attr('cx', d => width / 2)
+      .attr('cy', d => height / 2)
+      .attr('r', d => 5)
+      .attr('fill', d => d.color_score);
 
     group
-      .append("text")
-      .attr("text-anchor", function(d) {
-        return "middle";
-      })
-      .attr("x", function(d, i) {
-        return width / 2;
-      })
-      .attr("y", function(d, i) {
-        return height / 2;
-      })
-      .text(function(d) {
-        return d.word;
-      });
+      .append('text')
+      .attr('text-anchor', d => 'middle')
+      .attr('x', (d, i) => width / 2)
+      .attr('y', (d, i) => height / 2)
+      .attr('fill', 'black')
+      .text(d => d.word);
 
-    nodes_circles = d3.selectAll("circle");
-    nodes_texts = d3.selectAll("text");
+    nodes_circles = d3.selectAll('circle');
+    nodes_texts = d3.selectAll('text');
 
-    //simulation is a collection of forces
-    //that going to affect our circles
-    var simulation = d3
+    // simulation is a collection of forces
+    // that going to affect our circles
+    const simulation = d3
       .forceSimulation()
-      .force("x", d3.forceX(width / 2).strength(0.05))
-      .force("y", d3.forceY(height / 1.7).strength(0.05))
-      .force(
-        "collide",
-        d3.forceCollide(function(d) {
-          return radiusScale(d.size);
-        })
-      );
+      .force('x', d3.forceX(width / forceX).strength(0.05))
+      .force('y', d3.forceY(height / forceY).strength(0.05))
+      .force('collide', d3.forceCollide(d => radiusScale(d.size)));
     simulation.alphaDecay([0.001]);
-    simulation.nodes(data).on("tick", ticked);
+    simulation.nodes(data).on('tick', ticked);
     function ticked() {
       radius += 2;
       fontSize += 1;
       nodes_circles
-        .attr("cx", function(d) {
-          //  console.log("d", d);
-          return d.x;
-        })
-        .attr("cy", function(d) {
-          return d.y;
-        })
-        .attr("r", function(d) {
+        .attr(
+          'cx',
+          d =>
+            //  console.log("d", d);
+            d.x,
+        )
+        .attr('cy', d => d.y)
+        .attr('r', (d) => {
           if (radius >= radiusScale(d.size)) return radiusScale(d.size);
           return radius;
         });
       nodes_texts
-        .attr("x", function(d) {
-          return d.x;
-        })
-        .attr("y", function(d) {
-          return d.y;
-        })
-        .attr("style", function(d) {
-          if (fontSize >= radiusScale(d.size) / 2)
-            return `font-size: ${radiusScale(d.size) / 2}`;
+        .attr('x', d => d.x)
+        .attr('y', d => d.y)
+        .attr('style', (d) => {
+          if (fontSize >= radiusScale(d.size) / 2) return `font-size: ${radiusScale(d.size) / 2}`;
           return `font-size: ${fontSize}px`;
         });
     }
@@ -119,18 +117,18 @@ fetchGET(url, function(err, data) {
       d3
         .select(this)
         .raise()
-        .classed("active", true);
+        .classed('active', true);
     }
 
     function dragged(d) {
       d3
         .select(this)
-        .attr("cx", (d.x = d3.event.x))
-        .attr("cy", (d.y = d3.event.y));
+        .attr('cx', (d.x = d3.event.x))
+        .attr('cy', (d.y = d3.event.y));
     }
 
     function dragended(d) {
-      d3.select(this).classed("active", false);
+      d3.select(this).classed('active', false);
     }
   }
 });
