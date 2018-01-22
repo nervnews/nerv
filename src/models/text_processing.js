@@ -67,7 +67,7 @@ module.exports = text => {
     obj["freq"] = element[1];
     obj["sentiment"] = "neutral";
     obj["size"] = 0;
-    obj["color_score"] = 0;
+    obj["color_score"] = "green";
     return obj;
   });
 
@@ -75,10 +75,10 @@ module.exports = text => {
     var token = value["word"];
     if (positive_tokens.includes(token)) {
       value["sentiment"] = "positive";
-      value["color_score"] = 1;
+      value["color_score"] = "blue";
     } else if (negative_tokens.includes(token)) {
       value["sentiment"] = "negative";
-      value["color_score"] = -1;
+      value["color_score"] = "red";
     }
     return word;
   };
