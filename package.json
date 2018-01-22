@@ -32,8 +32,10 @@
     "express": "^4.16.2",
     "express-handlebars": "^3.0.0",
     "guardian-js": "^1.0.11",
+    "natural": "^0.5.6",
     "nodemon": "^1.14.11",
     "polarity": "^3.0.1",
-    "sentiment": "^4.1.0"
+    "sentiment": "^4.2.0",
+    "stopword": "^0.1.9"
   }
 }
