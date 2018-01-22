@@ -23,17 +23,7 @@ module.exports = text => {
   const NounInflector = new natural.NounInflector();
 
   const t_singular = t_removed_punct.map(word => {
-    try {
-      return NounInflector.singularize(word);
-    } catch (err) {
-      console.log("error", err);
-    }
-  });
-
-  const t_presentVerb = t_singular.map(word => {
-    try {
-      return VerbInflector.singularize(t_singular);
-    } catch (err) {}
+    return NounInflector.singularize(word);
   });
 
   const t_sentiment = sentiment(t_singular.join(" "));
