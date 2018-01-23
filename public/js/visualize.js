@@ -1,7 +1,7 @@
 const urlParams = new URLSearchParams(window.location.search);
 const url = `visualize/${urlParams.getAll('articleID')}`;
 
-fetchGET(url, (err, data) => {
+fetchGET(url, function(err, data){
   if (err) {
     alert("Could not get data requested. Please try search another key word!");
   } else {
