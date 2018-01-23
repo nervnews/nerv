@@ -1,29 +1,24 @@
-const urlParams = new URLSearchParams(window.location.search);
-const url = `visualize/${urlParams.getAll('articleID')}`;
+var urlParams = new URLSearchParams(window.location.search);
+var url = 'visualize/'+urlParams.getAll('articleID');
 
-document.getElementById('back_button').addEventListener('click', function(){
-  window.history.back();
-});
-fetchGET(url, function(err, response){
+fetchGET(url, function(err, data){
   if (err) {
-    console.log(err);
+    alert('Could not get data requested. Please try search another key word!');
   } else {
-    console.log(response);
     // This is the time to process the data using D3.js
     // By adding a console log, it's possible to see the data that is returned
     // from the backend after sentiment analysis processing.
     // The following is a proof of concept on how we render this data using D3.
-
-    const data = response.data.splice(0, 15);
+    var data = data.splice(0, 15);
     document.getElementById('title').innerHTML = response.title;
-    const svg = d3.select('svg');
-    const max_size = data[0].size;
-    const min_size = data[data.length - 1].size;
-    const width = window.innerWidth * 0.9;
-    const height = window.innerHeight * 0.9;
-    let radius = 4;
-    let fontSize = 4;
-    let scaleIt,
+    var svg = d3.select('svg');
+    var maxSize = data[0].size;
+    var minSize = data[data.length - 1].size;
+    var width = window.innerWidth * 0.9;
+    var height = window.innerHeight * 0.9;
+    var radius = 4;
+    var fontSize = 4;
+    var scaleIt,
       forceX,
       forceY,
       radiusX,
@@ -44,7 +39,7 @@ fetchGET(url, function(err, response){
 
     const radiusScale = d3
       .scaleSqrt()
-      .domain([min_size, max_size])
+      .domain([minSize, maxSize])
       .range([scaleIt / radiusX, scaleIt / radiusY]);
 
     const drag = d3
@@ -53,7 +48,7 @@ fetchGET(url, function(err, response){
       .on('drag', dragged)
       .on('end', dragended);
 
-    const group = svg
+    var group = svg
       .selectAll('g')
       .data(data)
       .enter()
@@ -62,47 +57,46 @@ fetchGET(url, function(err, response){
 
     group
       .append('circle')
-      .attr('cx', d => width / 2)
-      .attr('cy', d => height / 2)
-      .attr('r', d => 5)
-      .attr('fill', d => d.color_score);
+      .attr('cx',  width / 2)
+      .attr('cy',  height / 2)
+      .attr('r',  5)
+      .attr('fill', function(d) {return d.colorScore});
 
     group
       .append('text')
-      .attr('text-anchor', d => 'middle')
-      .attr('x', (d, i) => width / 2)
-      .attr('y', (d, i) => height / 2)
-      .attr('fill', 'black')
-      .text(d => d.word);
+      .attr('text-anchor', 'middle')
+      .attr('x',  width / 2)
+      .attr('y',  height / 2)
+      .text(function(d) {return d.word});
 
-    nodes_circles = d3.selectAll('circle');
-    nodes_texts = d3.selectAll('text');
+    nodesCircles = d3.selectAll('circle');
+    nodesTexts = d3.selectAll('text');
 
     // simulation is a collection of forces
     // that going to affect our circles
-    const simulation = d3
+    var simulation = d3
       .forceSimulation()
       .force('x', d3.forceX(width / forceX).strength(0.05))
       .force('y', d3.forceY(height / forceY).strength(0.05))
-      .force('collide', d3.forceCollide(d => radiusScale(d.size)));
+      .force('collide', d3.forceCollide(function(d) {return radiusScale(d.size)}));
     simulation.alphaDecay([0.001]);
     simulation.nodes(data).on('tick', ticked);
     function ticked() {
       radius += 2;
       fontSize += 1;
-      nodes_circles
-        .attr('cx', d => d.x)
-        .attr('cy', d => d.y)
-        .attr('r', (d) => {
+      nodesCircles
+        .attr('cx', function(d){return d.x})
+        .attr('cy', function(d){return d.y})
+        .attr('r', function(d){
           if (radius >= radiusScale(d.size)) return radiusScale(d.size);
           return radius;
         });
-      nodes_texts
-        .attr('x', d => d.x)
-        .attr('y', d => d.y)
-        .attr('style', (d) => {
-          if (fontSize >= radiusScale(d.size) / 2) return `font-size: ${radiusScale(d.size) / 2}`;
-          return `font-size: ${fontSize}px`;
+      nodesTexts
+        .attr('x', function(d){return d.x})
+        .attr('y', function(d){return d.y})
+        .attr('style', function(d) {
+          if (fontSize >= radiusScale(d.size) / 2) return ('font-size: '+radiusScale(d.size) / 2);
+          return 'font-size: '+fontSize+'px';
         });
     }
 

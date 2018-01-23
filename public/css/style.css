@@ -35,3 +35,12 @@ svg {
 #title {
   margin: 0;
 }
+
+svg {
+  display: block;
+  position: absolute;
+  top: 30%;
+  left: 5%;
+  width: 90%;
+  height: 70%;
+}

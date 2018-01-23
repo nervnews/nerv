@@ -5,12 +5,12 @@ const stopWordList = require('./stopWords.js')();
 const sigmoid = require('./sigmoid');
 
 module.exports = (text) => {
-  const t_lowerCase = text.toLowerCase();
+  const lowerCased = text.toLowerCase();
 
   const tokenizer = new natural.WordPunctTokenizer();
-  const t_tokenized = tokenizer.tokenize(t_lowerCase);
-  const t_stopword = stopword.removeStopwords(t_tokenized, stopWordList);
-  const t_removed_punct = t_stopword
+  const tokenized = tokenizer.tokenize(lowerCased);
+  const stopwordRemoved = stopword.removeStopwords(tokenized, stopWordList);
+  const punctRemoved = stopwordRemoved
     .map(word => word.replace(/[&\/\\#,+\(\)$~%\.!^'"\;:*?\[\]<>{}\s`”’]/g, ''))
     .filter((word) => {
       if (word != undefined && word.length > 1) {
@@ -19,25 +19,11 @@ module.exports = (text) => {
     });
 
   const NounInflector = new natural.NounInflector();
+  const singularized = punctRemoved.map(word => NounInflector.singularize(word));
+  const sentimented = sentiment(singularized.join(' '));
 
-  const t_singular = t_removed_punct.map((word) => {
-    try {
-      return NounInflector.singularize(word);
-    } catch (err) {
-      console.log('error', err);
-    }
-  });
-
-  const t_presentVerb = t_singular.map((word) => {
-    try {
-      return VerbInflector.singularize(t_singular);
-    } catch (err) {}
-  });
-
-  const t_sentiment = sentiment(t_singular.join(' '));
-
-  const positive_tokens = t_sentiment.positive;
-  const negative_tokens = t_sentiment.negative;
+  const positiveTokens = sentimented.positive;
+  const negativeTokens = sentimented.negative;
 
   const wordFreq = (textArray) => {
     const freqObj = {};
@@ -48,12 +34,12 @@ module.exports = (text) => {
     return freqObj;
   };
 
-  t_wordFreq = wordFreq(t_singular);
-  const max = Math.max(...Object.keys(t_wordFreq).map(k => t_wordFreq[k]));
+  const wordFreqCounted = wordFreq(singularized);
+  const max = Math.max(...Object.keys(wordFreqCounted).map(k => wordFreqCounted[k]));
   const sigmoidFunc = sigmoid(max);
   const wordFreqSorted = [];
-  for (var word in t_wordFreq) {
-    wordFreqSorted.push([word, t_wordFreq[word]]);
+  for (var word in wordFreqCounted) {
+    wordFreqSorted.push([word, wordFreqCounted[word]]);
   }
   wordFreqSorted.sort((a, b) => b[1] - a[1]);
 
@@ -63,23 +49,23 @@ module.exports = (text) => {
     obj.freq = element[1];
     obj.sentiment = 'neutral';
     obj.size = 0;
-    obj.color_score = 'green';
+    obj.colorScore = 'green';
     return obj;
   });
 
   const sentimentInsert = (value) => {
     const token = value.word;
-    if (positive_tokens.includes(token)) {
+    if (positiveTokens.includes(token)) {
       value.sentiment = 'positive';
-      value.color_score = 'blue';
-    } else if (negative_tokens.includes(token)) {
+      value.colorScore = 'blue';
+    } else if (negativeTokens.includes(token)) {
       value.sentiment = 'negative';
-      value.color_score = 'red';
+      value.colorScore = 'red';
     }
     return word;
   };
 
-  const score_calculator = (value) => {
+  const scoreCalculator = (value) => {
     value.size = value.freq;
     if (value.sentiment != 'neutral') {
       value.size = sigmoidFunc(value.freq);
@@ -87,7 +73,7 @@ module.exports = (text) => {
   };
 
   finalArr.map(sentimentInsert);
-  finalArr.map(score_calculator);
+  finalArr.map(scoreCalculator);
   finalArr.sort((a, b) => b.size - a.size);
 
   return finalArr.splice(0, 20);
