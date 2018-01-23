@@ -1,11 +1,11 @@
 const urlParams = new URLSearchParams(window.location.search);
 const url = `visualize/${urlParams.getAll('articleID')}`;
 
-document.getElementById('back_button').addEventListener('click', () => {
+document.getElementById('back_button').addEventListener('click', function(){
   console.log('I am clicked ');
   window.history.back();
 });
-fetchGET(url, (err, response) => {
+fetchGET(url, function(err, response){
   if (err) {
     console.log(err);
   } else {

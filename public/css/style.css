@@ -12,6 +12,14 @@
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
+.vh-40 {
+  height: 40vh;
+}
+
+.vh-85 {
+  height: 85vh;
+}
+
 h1 {
   font-family: 'Roboto', sans-serif;
 }
