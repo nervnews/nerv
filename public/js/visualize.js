@@ -1,11 +1,10 @@
 const urlParams = new URLSearchParams(window.location.search);
 const url = `visualize/${urlParams.getAll('articleID')}`;
 
-document.getElementById('back_button').addEventListener('click', () => {
-  console.log('I am clicked ');
+document.getElementById('back_button').addEventListener('click', function(){
   window.history.back();
 });
-fetchGET(url, (err, response) => {
+fetchGET(url, function(err, response){
   if (err) {
     console.log(err);
   } else {
@@ -16,7 +15,6 @@ fetchGET(url, (err, response) => {
     // The following is a proof of concept on how we render this data using D3.
 
     const data = response.data.splice(0, 15);
-    console.log('this is data-> ', data);
     document.getElementById('title').innerHTML = response.title;
     const svg = d3.select('svg');
     const max_size = data[0].size;
@@ -93,12 +91,7 @@ fetchGET(url, (err, response) => {
       radius += 2;
       fontSize += 1;
       nodes_circles
-        .attr(
-          'cx',
-          d =>
-            //  console.log("d", d);
-            d.x,
-        )
+        .attr('cx', d => d.x)
         .attr('cy', d => d.y)
         .attr('r', (d) => {
           if (radius >= radiusScale(d.size)) return radiusScale(d.size);
