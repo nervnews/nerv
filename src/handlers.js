@@ -1,6 +1,8 @@
 const express = require("express");
 const { guardianListing, guardianItem } = require("./models/guardian");
 const textProcessing = require("./models/text_processing");
+const passport = require("passport-facebook");
+
 exports.home = (re, res) => {
   res.render("home");
 };
@@ -27,3 +29,4 @@ exports.sentiments = (req, res) => {
     }
   });
 };
+
