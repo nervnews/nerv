@@ -5,15 +5,13 @@ const stopWordList = require("./stopWords.js")();
 const sigmoid = require("./sigmoid");
 
 module.exports = text => {
-  const t_lowerCase = text.toLowerCase();
+  const lowerCased = text.toLowerCase();
 
   const tokenizer = new natural.WordPunctTokenizer();
-  const t_tokenized = tokenizer.tokenize(t_lowerCase);
-  const t_stopword = stopword.removeStopwords(t_tokenized, stopWordList);
-  const t_removed_punct = t_stopword
-    .map(word => {
-      return word.replace(/[&\/\\#,+\(\)$~%\.!^'"\;:*?\[\]<>{}\s`”’]/g, "");
-    })
+  const tokenized = tokenizer.tokenize(lowerCased);
+  const stopwordRemoved = stopword.removeStopwords(tokenized, stopWordList);
+  const punctRemoved = stopwordRemoved
+    .map(word => word.replace(/[&\/\\#,+\(\)$~%\.!^'"\;:*?\[\]<>{}\s`”’]/g, ""))
     .filter(word => {
       if (word != undefined && word.length > 1) {
         return word;
@@ -21,18 +19,16 @@ module.exports = text => {
     });
 
   const NounInflector = new natural.NounInflector();
+  const singularized = punctRemoved.map(word =>
+    NounInflector.singularize(word)
+  );
+  const sentimented = sentiment(singularized.join(" "));
 
-  const t_singular = t_removed_punct.map(word => {
-    return NounInflector.singularize(word);
-  });
-
-  const t_sentiment = sentiment(t_singular.join(" "));
-
-  const positive_tokens = t_sentiment.positive;
-  const negative_tokens = t_sentiment.negative;
+  const positiveTokens = sentimented.positive;
+  const negativeTokens = sentimented.negative;
 
   const wordFreq = textArray => {
-    let freqObj = {};
+    const freqObj = {};
     textArray.forEach(word => {
       if (freqObj.hasOwnProperty(word)) freqObj[word] += 1;
       else freqObj[word] = 1;
@@ -40,51 +36,49 @@ module.exports = text => {
     return freqObj;
   };
 
-  t_wordFreq = wordFreq(t_singular);
-  const max = Math.max(...Object.keys(t_wordFreq).map(k => t_wordFreq[k]));
+  const wordFreqCounted = wordFreq(singularized);
+  const max = Math.max(
+    ...Object.keys(wordFreqCounted).map(k => wordFreqCounted[k])
+  );
   const sigmoidFunc = sigmoid(max);
-  var wordFreqSorted = [];
-  for (var word in t_wordFreq) {
-    wordFreqSorted.push([word, t_wordFreq[word]]);
+  const wordFreqSorted = [];
+  for (var word in wordFreqCounted) {
+    wordFreqSorted.push([word, wordFreqCounted[word]]);
   }
-  wordFreqSorted.sort(function(a, b) {
-    return b[1] - a[1];
-  });
+  wordFreqSorted.sort((a, b) => b[1] - a[1]);
 
-  var finalArr = wordFreqSorted.map(element => {
-    var obj = {};
-    obj["word"] = element[0];
-    obj["freq"] = element[1];
-    obj["sentiment"] = "neutral";
-    obj["size"] = 0;
-    obj["color_score"] = 0;
+  const finalArr = wordFreqSorted.map(element => {
+    const obj = {};
+    obj.word = element[0];
+    obj.freq = element[1];
+    obj.sentiment = "neutral";
+    obj.size = 0;
+    obj.colorScore = "green";
     return obj;
   });
 
   const sentimentInsert = value => {
-    var token = value["word"];
-    if (positive_tokens.includes(token)) {
-      value["sentiment"] = "positive";
-      value["color_score"] = 1;
-    } else if (negative_tokens.includes(token)) {
-      value["sentiment"] = "negative";
-      value["color_score"] = -1;
+    const token = value.word;
+    if (positiveTokens.includes(token)) {
+      value.sentiment = "positive";
+      value.colorScore = "blue";
+    } else if (negativeTokens.includes(token)) {
+      value.sentiment = "negative";
+      value.colorScore = "red";
     }
     return word;
   };
 
-  const score_calculator = value => {
-    value["size"] = value["freq"];
-    if (value["sentiment"] != "neutral") {
-      value["size"] = sigmoidFunc(value.freq);
+  const scoreCalculator = value => {
+    value.size = value.freq;
+    if (value.sentiment != "neutral") {
+      value.size = sigmoidFunc(value.freq);
     }
   };
 
   finalArr.map(sentimentInsert);
-  finalArr.map(score_calculator);
-  finalArr.sort(function(a, b) {
-    return b.size - a.size;
-  });
+  finalArr.map(scoreCalculator);
+  finalArr.sort((a, b) => b.size - a.size);
 
   return finalArr.splice(0, 20);
 };
