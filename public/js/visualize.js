@@ -1,7 +1,9 @@
 var urlParams = new URLSearchParams(window.location.search);
 var url = 'visualize/'+urlParams.getAll('articleID');
-
-fetchGET(url, function(err, data){
+document.getElementById('back_button').addEventListener('click', function()  {
+  window.history.back();
+});
+fetchGET(url, function(err, response){
   if (err) {
     alert('Could not get data requested. Please try search another key word!');
   } else {
@@ -9,7 +11,7 @@ fetchGET(url, function(err, data){
     // By adding a console log, it's possible to see the data that is returned
     // from the backend after sentiment analysis processing.
     // The following is a proof of concept on how we render this data using D3.
-    var data = data.splice(0, 15);
+    var data = response.data.splice(0, 15);
     document.getElementById('title').innerHTML = response.title;
     var svg = d3.select('svg');
     var maxSize = data[0].size;
