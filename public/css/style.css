@@ -20,7 +20,7 @@
   height: 85vh;
 }
 
-h1 {
+h1, p, a{
   font-family: 'Roboto', sans-serif;
 }
 
