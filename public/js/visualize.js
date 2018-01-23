@@ -3,7 +3,7 @@ const url = `visualize/${urlParams.getAll('articleID')}`;
 
 fetchGET(url, (err, data) => {
   if (err) {
-    console.log(err);
+    alert("Could not get data requested. Please try search another key word!");
   } else {
     // This is the time to process the data using D3.js
     // By adding a console log, it's possible to see the data that is returned
