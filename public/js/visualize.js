@@ -20,6 +20,7 @@ fetchGET(url, function(err, response){
     var height = window.innerHeight * 0.9;
     var radius = 4;
     var fontSize = 4;
+    var t = d3.transition().duration(500);
     var scaleIt,
       forceX,
       forceY,
@@ -55,7 +56,38 @@ fetchGET(url, function(err, response){
       .data(data)
       .enter()
       .append('g')
-      .call(drag);
+      .attr("id", function(d) {
+        return d.word;
+      })
+      .call(drag)
+      .on("dblclick", function(d) {
+        console.log("d event", d);
+        var elementToRemove = d3.select(`#${d.word}`);
+
+        elementToRemove
+          .selectAll("circle")
+          .style("fill", "grey")
+          .transition(t)
+          .attr("r", 1e-6)
+          .remove();
+
+        elementToRemove
+          .selectAll("text")
+          .transition(t)
+          .style("font-size", `${1e-6}px`)
+          .remove();
+
+        d3.interval(function() {
+          elementToRemove.remove();
+        }, 500);
+
+        data = data.filter(function(obj) {
+          return obj.word != d.word;
+        });
+
+        simulation.alphaTarget(0.01).restart();
+        simulation.nodes(data).on("tick", ticked);
+      });
 
     group
       .append('circle')
