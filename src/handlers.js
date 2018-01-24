@@ -1,6 +1,7 @@
 const express = require('express');
 const { guardianListing, guardianItem, guardianLatest } = require('./models/guardian');
 const textProcessing = require('./models/text_processing');
+const passport = require("passport-facebook");
 
 exports.home = (req, res) => {
   guardianLatest(1, (results) => {

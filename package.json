@@ -23,7 +23,8 @@
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0",
     "morgan": "^1.9.0",
-    "nodemon": "^1.14.11"
+    "nodemon": "^1.14.11",
+    "tachyons": "^4.9.1"
   },
   "dependencies": {
     "body-parser": "^1.18.2",
@@ -32,11 +33,16 @@
     "eslint": "^4.16.0",
     "express": "^4.16.2",
     "express-handlebars": "^3.0.0",
+    "express-session": "^1.15.6",
     "guardian-js": "^1.0.11",
     "natural": "^0.5.6",
-    "nodemon": "^1.14.11",
+    "passport": "^0.4.0",
+    "passport-facebook": "^2.1.1",
+    "pg": "^7.4.1",
     "polarity": "^3.0.1",
+    "randomstring": "^1.1.5",
     "sentiment": "^4.2.0",
-    "stopword": "^0.1.9"
+    "stopword": "^0.1.9",
+    "url": "^0.11.0"
   }
 }

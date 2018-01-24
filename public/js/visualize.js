@@ -1,8 +1,10 @@
 var urlParams = new URLSearchParams(window.location.search);
-var url = 'visualize/'+urlParams.getAll('articleID');
+var url = 'visualize/' + urlParams.getAll('articleID');
+
 document.getElementById('back_button').addEventListener('click', function()  {
   window.history.back();
 });
+
 fetchGET(url, function(err, response){
   if (err) {
     alert('Could not get data requested. Please try search another key word!');

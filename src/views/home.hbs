@@ -1,5 +1,14 @@
-
 {{>searchbar}}
+
+<div class="w-100 tc">
+<form class="mb4 " action="/auth/facebook" method="GET">
+   <input class="input__reset bn
+          shadow-1 fw6 white br3 ml2
+          pa2 pl3 pr3 bg-light-blue" type="submit"
+   value="Continue With Facebook">
+</form>
+</div>
+
 <div id="searchResults"
     class="search__results mw7 center">
   {{#each articles}}
@@ -20,3 +29,5 @@
   </div>
     {{/each}}
 </div>
+
+<script src="./js/sidemenu.js"></script>
