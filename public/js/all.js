@@ -4,8 +4,8 @@ document.getElementById('back').addEventListener('click', back);
 document.getElementById('play').addEventListener('click', play);
 document.onkeydown = checkKey;
 
-const urlParams = new URLSearchParams(window.location.search);
-const url = '/visualize_all_json';
+var urlParams = new URLSearchParams(window.location.search);
+var url = '/visualize_all_json';
 var i = 0;
 var started = false;
 var size, len, simulation, result, group, playS;
@@ -65,7 +65,7 @@ function drawCirlce(article) {
   }
   d3.selectAll('svg').remove();
   started = true;
-  const svg = d3.select('body').append('svg');
+  var svg = d3.select('body').append('svg');
 
   var data = [];
   article.data.forEach(function(obj) {
