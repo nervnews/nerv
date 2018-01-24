@@ -1,7 +1,9 @@
 var urlParams = new URLSearchParams(window.location.search);
 var url = 'visualize/'+urlParams.getAll('articleID');
-
-fetchGET(url, function(err, data){
+document.getElementById('back_button').addEventListener('click', function()  {
+  window.history.back();
+});
+fetchGET(url, function(err, response){
   if (err) {
     alert('Could not get data requested. Please try search another key word!');
   } else {
@@ -9,22 +11,38 @@ fetchGET(url, function(err, data){
     // By adding a console log, it's possible to see the data that is returned
     // from the backend after sentiment analysis processing.
     // The following is a proof of concept on how we render this data using D3.
-    var data = data.splice(0, 15);
-
+    var data = response.data.splice(0, 15);
+    document.getElementById('title').innerHTML = response.title;
     var svg = d3.select('svg');
     var maxSize = data[0].size;
     var minSize = data[data.length - 1].size;
     var width = window.innerWidth * 0.9;
     var height = window.innerHeight * 0.9;
-
     var radius = 4;
     var fontSize = 4;
-    var scaleIt = width < height ? width : height;
+    var scaleIt,
+      forceX,
+      forceY,
+      radiusX,
+      radiusY;
+    if (width < height) {
+      scaleIt = width;
+      forceX = 1.97;
+      forceY = 3;
+      radiusX = 20;
+      radiusY = 6;
+    } else {
+      scaleIt = height;
+      forceX = 2;
+      forceY = 2.5;
+      radiusX = 30;
+      radiusY = 10;
+    }
 
     var radiusScale = d3
       .scaleSqrt()
       .domain([minSize, maxSize])
-      .range([scaleIt / 20, scaleIt / 5]);
+      .range([scaleIt / radiusX, scaleIt / radiusY]);
 
     var drag = d3
       .drag()
@@ -60,8 +78,8 @@ fetchGET(url, function(err, data){
     // that going to affect our circles
     var simulation = d3
       .forceSimulation()
-      .force('x', d3.forceX(width / 2).strength(0.05))
-      .force('y', d3.forceY(height / 1.7).strength(0.05))
+      .force('x', d3.forceX(width / forceX).strength(0.05))
+      .force('y', d3.forceY(height / forceY).strength(0.05))
       .force('collide', d3.forceCollide(function(d) {return radiusScale(d.size)}));
     simulation.alphaDecay([0.001]);
     simulation.nodes(data).on('tick', ticked);

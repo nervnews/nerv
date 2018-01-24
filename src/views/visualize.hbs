@@ -1,18 +1,11 @@
-<head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width,
-      initial-scale=1.0">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <link rel="stylesheet" href="https://unpkg.com/tachyons@4.9.0/css/tachyons.min.css"/>
-      <link
-      href="https://fonts.googleapis.com/css?family=Roboto"
-      rel="stylesheet">
-      <link rel="stylesheet"
-            href="/css/style.css"/>
-      <title>NERV</title>
-</head>
-<h1>THIS IS THE VISUALIZE PAGE</h1>
-<svg width="100%" height="100%" border="1px"></svg>
+{{>header}}
+
+<div class ="wrap">
+<h2 id="title"></h2>
+<button id="back_button" class="bn shadow-1 bg-light-blue br3
+pa2 f5 white fw6 center">Back</button>
+</div>
+<div class="svg" ><svg border="1px"></svg></div>
 
 <script src="https://d3js.org/d3.v4.js"></script>
 <script src="./js/main.js"></script>
