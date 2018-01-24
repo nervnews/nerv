@@ -12,7 +12,7 @@
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-h1 {
+h1, h3, p, a {
   font-family: "Roboto", sans-serif;
 }
 
@@ -26,10 +26,6 @@ h1 {
 
 .mw6.5-ns {
   max-width: 40rem;
-}
-
-h1, h3, p, a{
-  font-family: 'Roboto', sans-serif;
 }
 
 svg {

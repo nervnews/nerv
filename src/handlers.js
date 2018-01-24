@@ -1,10 +1,13 @@
-const express = require("express");
-const { guardianListing, guardianItem } = require("./models/guardian");
-const textProcessing = require("./models/text_processing");
+const express = require('express');
+const { guardianListing, guardianItem, guardianLatest } = require('./models/guardian');
+const textProcessing = require('./models/text_processing');
 const passport = require("passport-facebook");
 
 exports.home = (req, res) => {
-  res.render("home");
+  guardianLatest(1, (results) => {
+    const articles = results;
+    res.status(200).render('home', { articles });
+  });
 };
 
 exports.listArticles = (req, res) => {
