@@ -5,7 +5,7 @@ const textProcessing = require('./models/text_processing');
 exports.home = (req, res) => {
   guardianLatest(1, (results) => {
     const articles = results;
-    res.status(200).render('articles', { articles });
+    res.status(200).render('home', { articles });
   });
 };
 
