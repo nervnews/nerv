@@ -1,2 +1,22 @@
 
 {{>searchbar}}
+<div id="searchResults"
+    class="search__results mw7 center">
+  {{#each articles}}
+  <div class="bg-white pa4 center br3 mb4">
+    <div class="mw9 measure center">
+    <img class="br2" src={{image}}></img>
+    </div>
+    <div class="measure center">
+    <a href={{url}}><h3 class="f4 f2-ns mt2 mb3">{{headline}}</h3></a>
+    <p class="f5 tj">{{trailText}}</p>
+    <form class"article_form" action="/visualize" method="GET">
+      <input name="articleID" type="hidden" value={{id}}>
+      <input class="article__btn
+      input__reset bn shadow-1 bg-light-blue br3
+      pa3 f5 white fw6 center" type="submit" value="Visualize">
+    </form>
+    </div>
+  </div>
+    {{/each}}
+</div>
