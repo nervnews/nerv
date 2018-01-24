@@ -1,9 +1,11 @@
 /* eslint-disable */
 var urlParams = new URLSearchParams(window.location.search);
-var url = 'visualize/'+urlParams.getAll('articleID');
-// document.getElementById('back_button').addEventListener('click', function()  {
-//   window.history.back();
-// });
+var url = 'visualize/get_article?' + urlParams.getAll('articleID');
+
+document.getElementById('back_button').addEventListener('click', function()  {
+  window.history.back();
+});
+
 fetchGET(url, function(err, response){
   if (err) {
     alert('Could not get data requested. Please try search another key word!');
@@ -41,12 +43,12 @@ fetchGET(url, function(err, response){
       radiusY = 10;
     }
 
-    const radiusScale = d3
+    var radiusScale = d3
       .scaleSqrt()
       .domain([minSize, maxSize])
       .range([scaleIt / radiusX, scaleIt / radiusY]);
 
-    const drag = d3
+    var drag = d3
       .drag()
       .on('start', dragstarted)
       .on('drag', dragged)
@@ -62,7 +64,6 @@ fetchGET(url, function(err, response){
       })
       .call(drag)
       .on("dblclick", function(d) {
-        console.log("d event", d);
         var elementToRemove = d3.select(`#${d.word}`);
 
         elementToRemove
@@ -83,7 +84,7 @@ fetchGET(url, function(err, response){
         }, 500);
 
         data = data.filter(function(obj) {
-          return obj.word != d.word;
+          return obj.word !== d.word;
         });
 
         simulation.alphaTarget(0.01).restart();

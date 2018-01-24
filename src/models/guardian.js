@@ -11,9 +11,9 @@ const guardianListing = (query, page, cb) => {
       page,
     })
     .then((response) => {
-      jsonRes = JSON.parse(response.body).response;
+      const jsonRes = JSON.parse(response.body).response;
       const { currentPage, pageSize } = jsonRes;
-      if (currentPage == 1) allArticles = [];
+      if (currentPage === 1) allArticles = [];
       if (currentPage + 1 <= pageSize && currentPage < 5) {
         allArticles = allArticles.concat(guardianFilter(jsonRes));
         guardianListing(query, currentPage + 1, cb);
@@ -31,11 +31,32 @@ const guardianItem = (id, cb) => {
     if (jsonRes.response.status === 'ok') {
       return cb(null, jsonRes.response.content.fields);
     }
-    cb(`Error${jsonRes}`);
+    return cb(`Error${jsonRes}`);
   });
+};
+
+const guardianLatest = (page, cb) => {
+  const api = new Guardian(process.env.GUARDIAN_KEY, false);
+  api.custom
+    .search({
+      'show-fields': 'headline,trailText,thumbnail,page,lastModified,shortUrl',
+      page,
+    })
+    .then((response) => {
+      const jsonRes = JSON.parse(response.body).response;
+      const { currentPage, pageSize } = jsonRes;
+      if (currentPage === 1) allArticles = [];
+      if (currentPage + 1 <= pageSize && currentPage < 3) {
+        allArticles = allArticles.concat(guardianFilter(jsonRes));
+        guardianLatest(currentPage + 1, cb);
+      } else {
+        cb(allArticles.concat(guardianFilter(jsonRes)));
+      }
+    });
 };
 
 module.exports = {
   guardianListing,
   guardianItem,
+  guardianLatest,
 };

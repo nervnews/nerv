@@ -15,8 +15,20 @@
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-h1 {
-  font-family: 'Roboto', sans-serif;
+h1, h3, p, a {
+  font-family: "Roboto", sans-serif;
+}
+
+.vh-40 {
+  height: 40vh;
+}
+
+.vh-85 {
+  height: 85vh;
+}
+
+.mw6.5-ns {
+  max-width: 40rem;
 }
 
 h3 {
@@ -26,6 +38,10 @@ h3 {
 #title {
   color: white;
   margin:0;
+}
+
+.main {
+  padding-top: 0.5em;
 }
 
 @media only screen and (min-width:320px) and (max-device-width:768px) {
@@ -59,6 +75,9 @@ h3 {
     justify-content: space-around;
     height: 30%;
   }
+}
+#mySideMenu {
+  display: none;
 }
 
 @media only screen and (min-device-width:768px) and (max-device-width:1024px) and (orientation:portrait) {
@@ -119,4 +138,14 @@ h3 {
     justify-content: space-around;
     height: 30%;
   }
+}
+/* Main page menu button */
+#burger {
+  margin-top: 0.7em;
+  width:2.5em;
+  height:2.5em;
+}
+
+#mySideMenu {
+  display: none;
 }
