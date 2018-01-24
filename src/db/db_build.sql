@@ -14,16 +14,4 @@ BEGIN;
         topic VARCHAR(50) NOT NULL
     );
 
-    /*INSERT INTO users(fb_id, name) VALUES
-    (12345678, "Mynah Test"),
-    (87654321, "Marie Test")
-
-    INSERT INTO topics(user_id, topic) VALUES
-    (1, "israel"),
-    (1, "canada"),
-    (2, "trump")*/
-
 COMMIT;
-
-    
-
