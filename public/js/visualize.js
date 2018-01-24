@@ -1,4 +1,3 @@
-/* eslint-disable */
 var urlParams = new URLSearchParams(window.location.search);
 var url = 'visualize/'+urlParams.getAll('articleID');
 document.getElementById('back_button').addEventListener('click', function()  {
