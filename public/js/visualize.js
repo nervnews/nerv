@@ -39,12 +39,12 @@ fetchGET(url, function(err, response){
       radiusY = 10;
     }
 
-    const radiusScale = d3
+    var radiusScale = d3
       .scaleSqrt()
       .domain([minSize, maxSize])
       .range([scaleIt / radiusX, scaleIt / radiusY]);
 
-    const drag = d3
+    var drag = d3
       .drag()
       .on('start', dragstarted)
       .on('drag', dragged)
