@@ -3,30 +3,39 @@ const { guardianListing, guardianItem } = require("./models/guardian");
 const textProcessing = require("./models/text_processing");
 const passport = require("passport-facebook");
 
-exports.home = (re, res) => {
+exports.home = (req, res) => {
   res.render("home");
 };
 
 exports.listArticles = (req, res) => {
   const query = req.body.search;
-  guardianListing(query, 1, results => {
+  guardianListing(query, 1, (results) => {
     const articles = results;
-    res.status(200).render("articles", { articles });
+    res.status(200).render('articles', { articles });
   });
 };
 
 exports.visualize = (req, res) => {
-  res.status(200).render("visualize");
+  res.status(200).render('visualize');
 };
 
 exports.sentiments = (req, res) => {
-  const query = req.url.split("visualize")[1];
+  const query = req.url.split('visualize')[1];
   guardianItem(query, (err, result) => {
     if (err) {
       res.send({ error: err });
     } else {
-      res.send(textProcessing(result));
+      res.send({
+        data: textProcessing(result.bodyText),
+        title: result.headline,
+      });
     }
   });
 };
 
+<<<<<<< HEAD
+=======
+exports.error = (req, res) => {
+  res.status(404).render('error');
+};
+>>>>>>> origin/sidemenu

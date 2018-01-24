@@ -1,15 +1,16 @@
-const Guardian = require("guardian-js");
-const guardian_filter = require("./guardian_filter");
+const Guardian = require('guardian-js');
+const guardian_filter = require('./guardian_filter');
+
 let allArticles = [];
 
 const guardianListing = (query, page, cb) => {
   const welvonAPI = new Guardian(process.env.GUARDIAN_KEY, false);
   welvonAPI.content
     .search(query, {
-      "show-fields": "headline,trailText,thumbnail,bodyText,page,lastModified",
-      page: page
+      'show-fields': 'headline,trailText,thumbnail,bodyText,page,lastModified,shortUrl',
+      page,
     })
-    .then(response => {
+    .then((response) => {
       jsonRes = JSON.parse(response.body).response;
       const { currentPage, pageSize } = jsonRes;
       if (currentPage == 1) allArticles = [];
@@ -24,17 +25,17 @@ const guardianListing = (query, page, cb) => {
 
 const guardianItem = (id, cb) => {
   const api = new Guardian(process.env.GUARDIAN_KEY, false);
-  api.item.search(id, { "show-fields": "bodyText" }).then(response => {
+  api.item.search(id, { 'show-fields': 'bodyText,headline' }).then((response) => {
     const jsonRes = JSON.parse(response.body);
 
-    if (jsonRes.response.status === "ok") {
-      return cb(null, jsonRes.response.content.fields.bodyText);
+    if (jsonRes.response.status === 'ok') {
+      return cb(null, jsonRes.response.content.fields);
     }
-    cb("Error" + jsonRes);
+    cb(`Error${jsonRes}`);
   });
 };
 
 module.exports = {
   guardianListing,
-  guardianItem
+  guardianItem,
 };
