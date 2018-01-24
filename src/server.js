@@ -1,11 +1,7 @@
 require("env2")("./config.env");
-<<<<<<< HEAD
 const Strategy = require("passport-facebook").Strategy;
 const router = require("./router");
 const routerOauth = require("./routerOauth");
-=======
-const router = require("./router");
->>>>>>> origin/sidemenu
 const logger = require("morgan");
 const path = require("path");
 const exphbs = require("express-handlebars");
@@ -64,6 +60,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(express.static(path.join(__dirname, "..", "public")));
+app.use(express.static(path.join(__dirname, "..", "..", "public")));
+
 app.use("/", router);
 app.use("/oauth", ensureAuthenticated, routerOauth);
 

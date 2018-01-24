@@ -33,9 +33,6 @@ exports.sentiments = (req, res) => {
   });
 };
 
-<<<<<<< HEAD
-=======
 exports.error = (req, res) => {
   res.status(404).render('error');
 };
->>>>>>> origin/sidemenu
