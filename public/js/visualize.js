@@ -1,3 +1,4 @@
+/* eslint-disable */
 var urlParams = new URLSearchParams(window.location.search);
 var url = 'visualize/'+urlParams.getAll('articleID');
 document.getElementById('back_button').addEventListener('click', function()  {
@@ -61,7 +62,6 @@ fetchGET(url, function(err, response){
       })
       .call(drag)
       .on("dblclick", function(d) {
-        console.log("d event", d);
         var elementToRemove = d3.select(`#${d.word}`);
 
         elementToRemove
@@ -82,7 +82,7 @@ fetchGET(url, function(err, response){
         }, 500);
 
         data = data.filter(function(obj) {
-          return obj.word != d.word;
+          return obj.word !== d.word;
         });
 
         simulation.alphaTarget(0.01).restart();
