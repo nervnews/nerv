@@ -7,13 +7,8 @@ document.onkeydown = checkKey;
 const urlParams = new URLSearchParams(window.location.search);
 const url = '/visualize_all_json';
 var i = 0;
-var size;
-var len;
-var simulation;
-var result;
-var group;
-var playS;
 var started = false;
+var size, len, simulation, result, group, playS;
 fetchGET(url, function(err, response) {
   if (err) {
     alert('Could not get data requested. Please try search another key word!');
