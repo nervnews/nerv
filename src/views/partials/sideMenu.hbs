@@ -1,14 +1,13 @@
-<div id="mySidenav" class="z-1 vh-85 w-70 bg-white absolute top-0 left-0 shadow-5 dn">
-  <div id="topNav" class="vh-25 pt3 bg-dark-blue">
-    <p class="white f2 b mt1 mw7 mb4 pl3 center">NERV</h1>
+<div id="mySideMenu" class="z-1 vh-85 w-70 mw5-ns bg-white absolute top-0 left-0 shadow-5">
+  <div id="topMenu" class="vh-25 pt3 bg-dark-blue">
+    <div class="flex">
+    <p class="white f2 b mt1 mw7 mb4 center">NERV</h1>
+    <a href="javascript:void(0)" id="close" class="f2 pl5 no-underline white">&times;</a><br>
+    </div>
     <p class="f4 pl4 white">Mario, Welcome!</p>
   </div>
-  <div id="bottomNav" class="vh-50 pt4 pl5 flex flex-column">
-    <!-- <a href="javascript:void(0)" class="f3 pl5" onclick="closeNav()">&times;</a><br> -->
+  <div id="bottomMenu" class="vh-50 pt4 pl5 flex flex-column">
     <a href="#" class="f3 mt1 mb4 no-underline black">Dashboard</a>
-    <!-- <a href="#" class="flex">
-      <img class= "mr2" src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTYuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjI0cHgiIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAwIDUzLjY2MyA1My42NjMiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUzLjY2MyA1My42NjM7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPGc+Cgk8ZyBpZD0iX3gzNl9fMV8iPgoJCTxnPgoJCQk8cGF0aCBkPSJNMzguNjI5LDBIMTUuMDM2Yy01LjAxNCwwLTkuMDk0LDQuMDg2LTkuMDk0LDkuMTA3djMwLjg1NGMwLDAuMzI2LDAuMTMsMC42NDEsMC4zNiwwLjg3bDEyLjQ1NCwxMi40NzIgICAgIGMwLjIzLDAuMjMsMC41NDIsMC4zNiwwLjg2OCwwLjM2aDE5LjAwNWM1LjAxNSwwLDkuMDkyLTQuMDg2LDkuMDkyLTkuMTA2VjkuMTA3QzQ3LjcyMSw0LjA4Niw0My42NDQsMCwzOC42MjksMHogTTE5LjAxNSw1MC4wODMgICAgIGwtOS45MjMtOS45MzdoNC44NjNjMi42OTUsMCw1LjA2LDIuMDEsNS4wNiw0LjI5OVY1MC4wODN6IE00NS4yNjQsNDQuNTU3YzAsMy42NjYtMi45NzcsNi42NDYtNi42MzUsNi42NDZIMjEuNDczdi02Ljc1OCAgICAgYzAtMy42NjQtMy40NDItNi43NjItNy41MTgtNi43NjJIOC40VjkuMTA3YzAtMy42NjQsMi45NzctNi42NDYsNi42MzYtNi42NDZoMjMuNTk1YzMuNjU2LDAsNi42MzQsMi45ODEsNi42MzQsNi42NDYgICAgIEw0NS4yNjQsNDQuNTU3TDQ1LjI2NCw0NC41NTd6IE0zNi4yOTcsMTQuNTI0SDE2LjYzN2MtMC42OCwwLTEuMjI5LDAuNTUtMS4yMjksMS4yM2MwLDAuNjgsMC41NSwxLjIzLDEuMjI5LDEuMjNoMTkuNjYxICAgICBjMC42OCwwLDEuMjI5LTAuNTUsMS4yMjktMS4yM0MzNy41MjYsMTUuMDc0LDM2Ljk3NywxNC41MjQsMzYuMjk3LDE0LjUyNHogTTM2LjI5NywyMS45MDlIMTYuNjM3Yy0wLjY4LDAtMS4yMjksMC41NS0xLjIyOSwxLjIzICAgICBjMCwwLjY4LDAuNTUsMS4yMywxLjIyOSwxLjIzaDE5LjY2MWMwLjY4LDAsMS4yMjktMC41NSwxLjIyOS0xLjIzQzM3LjUyNiwyMi40NTksMzYuOTc3LDIxLjkwOSwzNi4yOTcsMjEuOTA5eiBNMzYuMjk3LDI5LjI5NCAgICAgSDE2LjYzN2MtMC42OCwwLTEuMjI5LDAuNTUxLTEuMjI5LDEuMjI5YzAsMC42ODIsMC41NSwxLjIzMSwxLjIyOSwxLjIzMWgxOS42NjFjMC42OCwwLDEuMjI5LTAuNTUxLDEuMjI5LTEuMjMxICAgICBDMzcuNTI2LDI5Ljg0NSwzNi45NzcsMjkuMjk0LDM2LjI5NywyOS4yOTR6IiBmaWxsPSIjMDAwMDAwIi8+CgkJPC9nPgoJPC9nPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=" />
-      <p class="f3 mb4 no-underline black">Dashboard</p></a> -->
     <a href="#" class="f3 mt1 mb4 no-underline black">Settings</a>
     <a href="#" class="f3 mt1 mb4 no-underline black">Notification</a>
     <a href="#" class="f3 no-underline black">Logout</a>

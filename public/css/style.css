@@ -20,6 +20,10 @@
   height: 85vh;
 }
 
+.mw6.5-ns {
+  max-width: 40rem;
+}
+
 h1, h3, p, a{
   font-family: 'Roboto', sans-serif;
 }
@@ -42,4 +46,16 @@ svg {
 
 #title {
   margin: 0;
+}
+
+/* Main page menu button */
+#burger {
+  margin-top: 0.7em;
+  width:2.5em;
+  height:2.5em;
+}
+
+#mySideMenu {
+  /* transition: all 0.5s ease-in; */
+  display: none;
 }
