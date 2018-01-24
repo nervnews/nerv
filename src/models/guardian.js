@@ -13,7 +13,7 @@ const guardianListing = (query, page, cb) => {
     .then((response) => {
       const jsonRes = JSON.parse(response.body).response;
       const { currentPage, pageSize } = jsonRes;
-      if (currentPage == 1) allArticles = [];
+      if (currentPage === 1) allArticles = [];
       if (currentPage + 1 <= pageSize && currentPage < 5) {
         allArticles = allArticles.concat(guardianFilter(jsonRes));
         guardianListing(query, currentPage + 1, cb);
@@ -31,7 +31,7 @@ const guardianItem = (id, cb) => {
     if (jsonRes.response.status === 'ok') {
       return cb(null, jsonRes.response.content.fields);
     }
-    cb(`Error${jsonRes}`);
+    return cb(`Error${jsonRes}`);
   });
 };
 
