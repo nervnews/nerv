@@ -2,7 +2,6 @@ require('env2')('./config.env');
 const Strategy = require('passport-facebook').Strategy;
 const router = require('./router');
 const routerOauth = require('./routerOauth');
-const logger = require('morgan');
 const path = require('path');
 const exphbs = require('express-handlebars');
 const helpers = require('./views/helpers/index');
@@ -39,7 +38,6 @@ passport.use(new Strategy(
 
 const app = express();
 
-app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(require('express-session')({ secret: process.env.SECRET, resave: true, saveUninitialized: true }));
