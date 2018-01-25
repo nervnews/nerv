@@ -29,12 +29,12 @@ passport.use(new Strategy(
   {
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: 'http://localhost:3000/auth/facebook/callback',
+    callbackURL: 'http://nervenews.herokuapp.com/auth/facebook/callback',
     profileFields: ['id', 'name', 'email'],
   },
   (accessToken, refreshToken, profile, done) => {
-    process.nextTick(() => done(null, profile));
-  },
+    process.nextTick(() =>  done(null, profile));
+  }
 ));
 
 const app = express();
@@ -54,7 +54,7 @@ app.engine(
     partialsDir: path.join(__dirname, 'views', 'partials'),
     defaultLayout: 'main',
     helpers,
-  }),
+  })
 );
 
 app.use(passport.initialize());
