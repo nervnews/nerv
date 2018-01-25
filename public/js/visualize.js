@@ -1,5 +1,6 @@
+/* eslint-disable */
 var urlParams = new URLSearchParams(window.location.search);
-var url = 'visualize/' + urlParams.getAll('articleID');
+var url = 'visualize/get_article?' + urlParams.getAll('articleID');
 
 document.getElementById('back_button').addEventListener('click', function()  {
   window.history.back();
@@ -30,10 +31,10 @@ fetchGET(url, function(err, response){
       radiusY;
     if (width < height) {
       scaleIt = width;
-      forceX = 1.97;
-      forceY = 3;
+      forceX = 1.75;
+      forceY = 2.5;
       radiusX = 20;
-      radiusY = 6;
+      radiusY = 5.5;
     } else {
       scaleIt = height;
       forceX = 2;
@@ -113,7 +114,7 @@ fetchGET(url, function(err, response){
       .forceSimulation()
       .force('x', d3.forceX(width / forceX).strength(0.05))
       .force('y', d3.forceY(height / forceY).strength(0.05))
-      .force('collide', d3.forceCollide(function(d) {return radiusScale(d.size)}));
+      .force('collide', d3.forceCollide(function(d) {return radiusScale(d.size) + 1;}));
     simulation.alphaDecay([0.001]);
     simulation.nodes(data).on('tick', ticked);
     function ticked() {
@@ -130,7 +131,7 @@ fetchGET(url, function(err, response){
         .attr('x', function(d){return d.x})
         .attr('y', function(d){return d.y})
         .attr('style', function(d) {
-          if (fontSize >= radiusScale(d.size) / 2) return ('font-size: '+radiusScale(d.size) / 2);
+          if (fontSize >= radiusScale(d.size) / 2.2) return ('font-size: '+radiusScale(d.size) / 2);
           return 'font-size: '+fontSize+'px';
         });
     }

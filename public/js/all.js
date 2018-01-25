@@ -65,7 +65,14 @@ function drawCirlce(article) {
   }
   d3.selectAll('svg').remove();
   started = true;
-  var svg = d3.select('body').append('svg');
+  var svg = d3
+    .select('body')
+    .append('svg')
+    .attr('fill', 'black')
+    .style('background-color', '#e5e5e5')
+    .style('font-family', 'Roboto');
+
+  // fill="black" style="background-color:#e5e5e5; font-family: 'Roboto', sans-serif;"
 
   var data = [];
   article.data.forEach(function(obj) {
@@ -83,10 +90,10 @@ function drawCirlce(article) {
   var scaleIt, forceX, forceY, radiusX, radiusY;
   if (width < height) {
     scaleIt = width;
-    forceX = 1.97;
-    forceY = 3;
+    forceX = 1.75;
+    forceY = 2.5;
     radiusX = 20;
-    radiusY = 6;
+    radiusY = 5.5;
   } else {
     scaleIt = height;
     forceX = 2;

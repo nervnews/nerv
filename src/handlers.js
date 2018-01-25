@@ -25,7 +25,7 @@ exports.visualize = (req, res) => {
 };
 
 exports.sentiments = (req, res) => {
-  const query = req.url.split('visualize')[1];
+  const query = req.url.split('?')[1];
   guardianItem(query, (err, result) => {
     if (err) {
       res.send({ error: err });
