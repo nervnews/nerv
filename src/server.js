@@ -2,7 +2,6 @@ require('env2')('./config.env');
 const Strategy = require('passport-facebook').Strategy;
 const router = require('./router');
 const routerOauth = require('./routerOauth');
-const logger = require('morgan');
 const path = require('path');
 const exphbs = require('express-handlebars');
 const helpers = require('./views/helpers/index');
@@ -29,17 +28,16 @@ passport.use(new Strategy(
   {
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: 'http://localhost:3000/auth/facebook/callback',
+    callbackURL: 'http://nervenews.herokuapp.com/auth/facebook/callback',
     profileFields: ['id', 'name', 'email'],
   },
   (accessToken, refreshToken, profile, done) => {
-    process.nextTick(() => done(null, profile));
-  },
+    process.nextTick(() =>  done(null, profile));
+  }
 ));
 
 const app = express();
 
-app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(require('express-session')({ secret: process.env.SECRET, resave: true, saveUninitialized: true }));
@@ -54,7 +52,7 @@ app.engine(
     partialsDir: path.join(__dirname, 'views', 'partials'),
     defaultLayout: 'main',
     helpers,
-  }),
+  })
 );
 
 app.use(passport.initialize());
