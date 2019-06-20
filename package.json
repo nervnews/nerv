@@ -34,7 +34,7 @@
     "express": "^4.16.2",
     "express-handlebars": "^3.0.0",
     "express-session": "^1.15.6",
-    "guardian-js": "^1.0.11",
+    "guardian-js": "^2.0.0",
     "natural": "^0.5.6",
     "passport": "^0.4.0",
     "passport-facebook": "^2.1.1",
