@@ -30,7 +30,7 @@
     "body-parser": "^1.18.2",
     "emotional": "0.0.3",
     "env2": "^2.2.0",
-    "eslint": "^4.16.0",
+    "eslint": "^5.0.0",
     "express": "^4.16.2",
     "express-handlebars": "^3.0.0",
     "express-session": "^1.15.6",
