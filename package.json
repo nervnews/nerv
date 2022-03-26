@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/server.js",
-    "dev": "nodemon src/server.js"
+    "dev": "nodemon src/server.js",
+    "prepare": "npm run snyk-protect",
+    "snyk-protect": "snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -43,6 +45,8 @@
     "randomstring": "^1.1.5",
     "sentiment": "^4.2.0",
     "stopword": "^0.1.9",
-    "url": "^0.11.0"
-  }
+    "url": "^0.11.0",
+    "@snyk/protect": "latest"
+  },
+  "snyk": true
 }
