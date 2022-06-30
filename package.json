@@ -36,7 +36,7 @@
     "express-session": "^1.15.6",
     "guardian-js": "^2.0.0",
     "natural": "^0.5.6",
-    "passport": "^0.4.0",
+    "passport": "^0.6.0",
     "passport-facebook": "^2.1.1",
     "pg": "^7.4.1",
     "polarity": "^3.0.1",
