@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/server.js",
-    "dev": "nodemon src/server.js"
+    "dev": "nodemon src/server.js",
+    "prepare": "npm run snyk-protect",
+    "snyk-protect": "snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -35,14 +37,16 @@
     "express-handlebars": "^3.0.0",
     "express-session": "^1.15.6",
     "guardian-js": "^2.0.0",
-    "natural": "^0.5.6",
-    "passport": "^0.4.0",
+    "natural": "^5.1.11",
+    "passport": "^0.6.0",
     "passport-facebook": "^2.1.1",
     "pg": "^7.4.1",
     "polarity": "^3.0.1",
     "randomstring": "^1.1.5",
     "sentiment": "^4.2.0",
     "stopword": "^0.1.9",
-    "url": "^0.11.0"
-  }
+    "url": "^0.11.0",
+    "@snyk/protect": "latest"
+  },
+  "snyk": true
 }
